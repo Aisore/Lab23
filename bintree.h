@@ -9,8 +9,9 @@ typedef struct tree {
 } Tree;
 
 void paste_node(Tree **l, int x);
-Tree *delete_node(Tree *l, int key);
+Tree *minimum(Tree *tr);
+Tree *delete_node(Tree *l, int num);
 void print_tree(Tree *l, int depth);
-void top_of_tree(Tree *tr, int quantity);
+int check_node(Tree **tr, int x);
 
 #endif

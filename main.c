@@ -9,7 +9,8 @@
 
 int main(void)
 {
-    int num;
+    int num, quan = 0;
+    int ch = 0;
     char input[size];
     Tree *tree_bin = NULL;
     for (;;) {
@@ -22,14 +23,16 @@ int main(void)
             printf("Print 'Exit' to close program\n");
         } else if (!strcmp(input, "Paste")) {
             while(scanf("%d", &num)) {
-                paste_node(&tree_bin, num); //tree
+                ch = check_node(&tree_bin, num);
+                paste_node(&tree_bin, num);
+                if (ch == 1) {quan++;}
             }
         } else if (!strcmp(input, "Delete")) {
             if (!tree_bin) {
                 printf("There are not nodes in tree\n");
             } else {
                 while(scanf("%d", &num)) {
-                    delete_node(tree_bin, num);  //tree
+                    delete_node(tree_bin, num);
                 }
             }
         } else if (!strcmp(input, "Print")) {
@@ -38,7 +41,7 @@ int main(void)
             if (!tree_bin) {
                 printf("There are not nodes in tree\n");
             } else {
-                top_of_tree(tree_bin, 0);   
+                printf("%d\n", quan);
             }    
         } else if (!strcmp(input, "Exit")) {
             free(tree_bin);
@@ -48,6 +51,7 @@ int main(void)
             fprintf(stdout, "Print 'Help' for information\n");
             exit(0);
         }
-    }   
+    }
+    free(tree_bin);   
     return 1;
 }
