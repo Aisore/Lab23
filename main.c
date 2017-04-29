@@ -44,7 +44,6 @@ int main(void)
                 printf("%d\n", quan);
             }    
         } else if (!strcmp(input, "Exit")) {
-            free(tree_bin);
             return 0;
         } else {
             fprintf(stderr, "Invalid command input\n");
@@ -52,6 +51,5 @@ int main(void)
             exit(0);
         }
     }
-    free(tree_bin);   
     return 1;
 }

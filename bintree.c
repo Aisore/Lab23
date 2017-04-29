@@ -3,10 +3,9 @@
 
 #include "bintree.h"
 
-void paste_node(Tree **tr, int x)
+void paste_node(Tree ** tr, int x)
 {
     Tree *tree_bin;
-
     if ((*tr) == NULL) {
         tree_bin = (Tree *) malloc(sizeof(Tree));
         tree_bin->item = x;
@@ -14,26 +13,24 @@ void paste_node(Tree **tr, int x)
         *tr = tree_bin;
         return;
     }
-    
+
     if (x < (*tr)->item) {
         paste_node(&((*tr)->lchild), x);
-    } else if (x == (*tr)->item) {
-        (*tr)->item = x;
     } else {
         paste_node(&((*tr)->rchild), x);
     }
 }
 
-Tree *minimum(Tree *tr)
+Tree * minimum(Tree *tr)
 {
     if (tr->lchild == NULL) return tr;
     return minimum(tr->lchild);
 }
 
-Tree *delete_node(Tree *tr, int num)
-{
+Tree* delete_node(Tree* tr, int num)
+{ 
     if (tr == NULL) return tr;
-    
+
     if (num < tr->item)
         tr->lchild = delete_node(tr->lchild, num);
     else if (num > tr->item)
@@ -42,7 +39,7 @@ Tree *delete_node(Tree *tr, int num)
         if (tr->lchild == NULL) {
             Tree *tree_bin = tr->rchild;
             free(tr);
-            return tree_bin;           
+            return tree_bin;
         }
         else if (tr->rchild == NULL) {
             Tree *tree_bin = tr->lchild;
