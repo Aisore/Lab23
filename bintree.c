@@ -88,3 +88,20 @@ void demolish(Tree *l)
     
     free(l);
 }
+
+int NodeCount(Tree *node)
+{
+    if (node->left == NULL && node->right == NULL)
+        return 1;
+    int left, right;
+    if (node->left != NULL)
+        left = NodeCount(node->left);
+    else
+        left = 0;
+    if (node->right != NULL)
+        right = NodeCount(node->right); 
+    else 
+        right = 0;
+
+    return left+right+1;
+}

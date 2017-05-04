@@ -14,6 +14,6 @@ void delete_tree(Tree *l, int key);
 Tree *search_tree(Tree *l, int x);
 void print_tree(Tree *l, int depth);
 void demolish(Tree *l);
-//bool check_node(Tree *l, int x);
+int NodeCount(Tree *node);
 
 #endif

@@ -11,7 +11,6 @@ int main(void)
     char cli_input[8];
     int input;
     int quan = 0;
-    int ch;
     Tree *baum = NULL;
     
     printf("To get help type 'help'\n");    
@@ -27,10 +26,6 @@ int main(void)
             printf("'top' - print number of vertices of a tree.\n");
         } else if (!strcmp(cli_input, "delete") || !strcmp(cli_input, "del")) {
             while (scanf("%d", &input))
-                //ch = check_node(baum, input);
-                //if (ch) {
-                //    quan--;
-                //}
                 baum = delete_node(baum, input);
         } else if (!strcmp(cli_input, "quit") || !strcmp(cli_input, "exit") || !strcmp(cli_input, "q")) {
             demolish(baum);
@@ -43,13 +38,10 @@ int main(void)
             printf("\n");
         } else if (!strcmp(cli_input, "insert") || !strcmp(cli_input, "ins")) {
             while (scanf("%d", &input))
-                //ch = check_node(baum, input);
-                //if (!ch) {
-                //    quan++;
-                //}
                 insert_tree(&baum, input);
-        //} else if (!strcmp(cli_input, "top")) { 
-            //printf("%d", quan);
+        } else if (!strcmp(cli_input, "top")) { 
+            quan = NodeCount(baum);
+            printf("%d", quan);
         } else {
             printf("The command is not recognised. Type 'help'.\n\n");
         }
