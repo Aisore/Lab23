@@ -1,18 +1,19 @@
-#ifndef _BINTREE_H_
-#define _BINTREE_H_
+#ifndef _BINARYTREE_H_
+#define _BINARYTREE_H_
 
 #include <stdbool.h>
 
 typedef struct tree {
-    int item;
-    struct tree *lchild, *rchild;
+	int item;
+	struct tree *left;
+	struct tree *right;
 } Tree;
 
-void paste_node(Tree **l, int x);
-Tree *minimum(Tree *tr);
-Tree *delete_node(Tree *l, int num);
+void insert_tree(Tree **l, int x);
+void delete_tree(Tree *l, int key);
+Tree *search_tree(Tree *l, int x);
 void print_tree(Tree *l, int depth);
-int check_node(Tree **tr, int x);
-
+void demolish(Tree *l);
+//bool check_node(Tree *l, int x);
 
 #endif

@@ -1,55 +1,59 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 
-#include "bintree.c"
 #include "bintree.h"
-
-#define size 7 
+#include "bintree.c"
 
 int main(void)
 {
-    int num, quan = 0;
-    int ch = 0;
-    char input[size];
-    Tree *tree_bin = NULL;
+    char cli_input[8];
+    int input;
+    int quan = 0;
+    int ch;
+    Tree *baum = NULL;
+    
+    printf("To get help type 'help'\n");    
+    
     for (;;) {
-        scanf("%7s", &input);
-        if (!strcmp(input, "Help")) {
-            printf("Print 'Paste' to paste node into tree\n");
-            printf("Print 'Delete' to delete node from tree\n");
-            printf("Print 'Print' to print tree\n");
-            printf("Print 'Top' to print number of vertices of a tree \n");
-            printf("Print 'Exit' to close program\n");
-        } else if (!strcmp(input, "Paste")) {
-            while(scanf("%d", &num)) {
-                ch = check_node(&tree_bin, num);
-                paste_node(&tree_bin, num);
-                if (ch == 1) {quan++;}
-            }
-        } else if (!strcmp(input, "Delete")) {
-            if (!tree_bin) {
-                printf("There are not nodes in tree\n");
-            } else {
-                while(scanf("%d", &num)) {
-                    delete_node(tree_bin, num);
-                }
-            }
-        } else if (!strcmp(input, "Print")) {
-            print_tree(tree_bin, 0);
-        } else if (!strcmp(input, "Top")) {
-            if (!tree_bin) {
-                printf("There are not nodes in tree\n");
-            } else {
-                printf("%d\n", quan);
-            }    
-        } else if (!strcmp(input, "Exit")) {
+        scanf("%7s", cli_input);
+        
+        if (!strcmp(cli_input, "help")) {
+            printf("'insert' or 'ins' - insert new nodes.\n");
+            printf("'delete' or 'del' - delete the vertice and all nested vertices.\n");
+            printf("'print' or 'p' - print the tree.\n");
+            printf("'quit', 'q' or 'exit' - close the program.\n");
+            printf("'top' - print number of vertices of a tree.\n");
+        } else if (!strcmp(cli_input, "delete") || !strcmp(cli_input, "del")) {
+            while (scanf("%d", &input))
+                //ch = check_node(baum, input);
+                //if (ch) {
+                //    quan--;
+                //}
+                baum = delete_node(baum, input);
+        } else if (!strcmp(cli_input, "quit") || !strcmp(cli_input, "exit") || !strcmp(cli_input, "q")) {
+            demolish(baum);
             return 0;
+        } else if (!strcmp(cli_input, "print") || !strcmp(cli_input, "p")) {
+            printf("\n");
+            if (!baum)
+                printf("There are no vertices in the tree.\n");
+            print_tree(baum, 0);
+            printf("\n");
+        } else if (!strcmp(cli_input, "insert") || !strcmp(cli_input, "ins")) {
+            while (scanf("%d", &input))
+                //ch = check_node(baum, input);
+                //if (!ch) {
+                //    quan++;
+                //}
+                insert_tree(&baum, input);
+        //} else if (!strcmp(cli_input, "top")) { 
+            //printf("%d", quan);
         } else {
-            fprintf(stderr, "Invalid command input\n");
-            fprintf(stdout, "Print 'Help' for information\n");
-            exit(0);
+            printf("The command is not recognised. Type 'help'.\n\n");
         }
     }
+    
     return 1;
 }
